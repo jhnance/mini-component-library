@@ -14,7 +14,9 @@ function Select({ label, value, onChange, children }) {
         <FlexWrapper>
           {displayedValue}
           <Icon id="chevron-down" className="leftPadding" />
-          <HiddenSelect onChange={onChange}>{children}</HiddenSelect>
+          <HiddenSelect value={value} onChange={onChange}>
+            {children}
+          </HiddenSelect>
         </FlexWrapper>
       </Wrapper>
     </>
@@ -42,8 +44,7 @@ const HiddenSelect = styled.select`
 `;
 
 const Wrapper = styled.div`
-  display: inline-block;
-  width: auto;
+  width: max-content;
   height: 43px;
   padding: 12px 16px;
   background-color: ${COLORS.transparentGray15};
