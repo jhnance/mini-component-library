@@ -9,29 +9,21 @@ function Select({ label, value, onChange, children }) {
   const displayedValue = getDisplayedValue(value, children);
 
   return (
-    <>
-      <Wrapper label={label}>
-        <FlexWrapper>
-          {displayedValue}
-          <Icon id="chevron-down" className="leftPadding" />
-          <HiddenSelect value={value} onChange={onChange}>
-            {children}
-          </HiddenSelect>
-        </FlexWrapper>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <HiddenSelect label={label} value={value} onChange={onChange}>
+        {children}
+      </HiddenSelect>
+      <CustomSelect>
+        {displayedValue}
+        <Icon id="chevron-down" className="leftPadding" />
+      </CustomSelect>
+    </Wrapper>
   );
 }
 
-const FlexWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-
-  .leftPadding {
-    padding-left: 15px;
-  }
+const Wrapper = styled.div`
+  position: relative;
+  width: max-content;
 `;
 
 const HiddenSelect = styled.select`
@@ -43,16 +35,27 @@ const HiddenSelect = styled.select`
   opacity: 0;
 `;
 
-const Wrapper = styled.div`
-  width: max-content;
-  height: 43px;
+const CustomSelect = styled.div`
   padding: 12px 16px;
+  padding-right: 12px;
   background-color: ${COLORS.transparentGray15};
-  border: none;
   border-radius: 8px;
   font-size: 16px;
   color: ${COLORS.gray700};
-  position: relative;
+  display: flex;
+  align-items: center;
+
+  .leftPadding {
+    padding-left: 15px;
+  }
+
+  ${HiddenSelect}:focus + & {
+    outline: 2px solid hsl(218deg 57% 53%);
+  }
+
+  ${HiddenSelect}:hover + & {
+    color: black;
+  }
 `;
 
 export default Select;
