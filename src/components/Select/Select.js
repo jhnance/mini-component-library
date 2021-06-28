@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import VisuallyHidden from '../VisuallyHidden';
 
 import { COLORS } from '../../constants';
 import Icon from '../Icon';
@@ -10,7 +11,10 @@ function Select({ label, value, onChange, children }) {
 
   return (
     <Wrapper>
-      <HiddenSelect label={label} value={value} onChange={onChange}>
+      <VisuallyHidden>
+        <label for={label}>Choose an option:</label>
+      </VisuallyHidden>
+      <HiddenSelect id={label} value={value} onChange={onChange}>
         {children}
       </HiddenSelect>
       <CustomSelect>
